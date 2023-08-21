@@ -4,16 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Delivery en Honduras | ParaYa</title>
-    <link id="link-css" rel="stylesheet" href="css/landing.css">
+    <link id="link-css" rel="stylesheet" href="assets/css/landing.css">
 </head>
 <body id="body">
     <div id="opacity">
         <header>
-            <img src="../img/logo.png" alt="Logo de ParaYa" id="logo">
+            <img src="../assets/img/logo.png" alt="Logo de ParaYa" id="logo">
             <div id="header-bts">
-                <button href="motorista/login.html" class="head-bt"><img id="head-icon" src="../img/delivery-guy.png" alt="">¿Sos motorista de ParaYa?</button>
-                <button class="head-bt"><img id="store-icon" src="../img/store-icon.png" alt="">¿Tenés tu empresa registrada en ParaYa?</button>
-                <button onclick="login()"class="head-bt"><img id="login-icon" src="img/login.png" alt="">Iniciar Sesión</button>
+                <button class="head-bt"><img id="head-icon" src="../assets/img/delivery-guy.png" alt="">¿Sos motorista de ParaYa?</button>
+                <button class="head-bt"><img id="store-icon" src="../assets/img/store-icon.png" alt="">¿Tenés tu empresa registrada en ParaYa?</button>
+                <button onclick="login()" class="head-bt"><img id="login-icon" src="assets/img/login.png" alt="">Iniciar Sesión</button>
             </div>
         </header>
         <section id="image-slogan">
@@ -36,21 +36,21 @@
                 <div class="cont-right">
                     <div style="display: grid; justify-self: flex-end;">
                         <div class="cont-img">
-                            <img class="guy" src="img/guy.png" alt="">
+                            <img class="guy" src="assets/img/guy.png" alt="">
                         </div>
                         <p style="justify-self: center; font-size: 1rem; font-weight: bold;">En Scooter</p>
                         <div class="cont-img">
-                            <img class="guy" src="img/guy1.png" alt="">
+                            <img class="guy" src="assets/img/guy1.png" alt="">
                         </div>
                         <p style="justify-self: center; font-size: 1rem; font-weight: bold;">En Motoneta</p>
                     </div>
                     <div style="display: grid; justify-self: flex-start;">
                         <div class="cont-img">
-                            <img class="guy" src="img/guy2.webp" alt="">
+                            <img class="guy" src="assets/img/guy2.webp" alt="">
                         </div>
                         <p style="justify-self: center; font-size: 1rem; font-weight: bold;">En Bicicleta</p>
                         <div class="cont-img">
-                            <img class="guy" src="img/guy3.webp" alt="">
+                            <img class="guy" src="assets/img/guy3.webp" alt="">
                         </div>
                         <p style="justify-self: center; font-size: 1rem; font-weight: bold;">En Auto</p>
                     </div>
@@ -93,8 +93,12 @@
                 <hr id="line">
                 ParaYa © 2023
             </div>
-            loloo
         </footer>
     </div>
+    <script>
+        function login(){
+            window.location.href="../login.html"
+        }
+    </script>
 </body>
 </html>
