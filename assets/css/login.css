@@ -17,7 +17,7 @@ body{
     height: 100vh;
 }
 
-#login-form{
+#login-container{
     display: flex;
     flex-direction: column;
     height: 500px;
@@ -90,4 +90,8 @@ body{
 
 #register:hover{
     text-decoration: underline;
+}
+
+#address-bt{
+    box-sizing: border-box;
 }

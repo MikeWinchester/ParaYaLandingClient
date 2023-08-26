@@ -1,6 +1,6 @@
 const HOST = 'localhost';
 const PORT = '3000';
-const URL = `http://${HOST}:${PORT}`
+const URL = `http://${HOST}:${PORT}`;
 
 document.getElementById("register-form").addEventListener("submit", function(event){
     
