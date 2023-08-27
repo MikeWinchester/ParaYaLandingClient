@@ -253,18 +253,20 @@ function loadProducts(categoria, id){
         if(pedido.productos.length === 0){
             alert('No has agregado nada a tu pedido.')
         }else{
+            const seconds = date.getSeconds();
             const minutes = date.getMinutes();
             const hours =  date.getHours();
             const day = date.getDay() + 20;
             const month = date.getMonth() + 1;
             
+            const formatSeconds =  seconds < 10 ? `0${seconds}` : seconds;
             const formatHours = hours < 10 ? `0${hours}` : hours;
             const formatMinutes = minutes < 10 ? `0${minutes}` : minutes;
             const formatDay = day < 10 ?  `0${day}` : day;
             const formatMonth = month < 10 ? `0${month}` : month;
 
             pedido.fecha = `${formatDay}/${formatMonth}/${date.getFullYear()}`;
-            pedido.hora = `${formatHours}:${formatMinutes}`;
+            pedido.hora = `${formatHours}:${formatMinutes}:${formatSeconds}`;
 
             fetch(`${URL}/usuarios/${infoUsuario._id}/carro-de-compras`,{
                 method: 'PUT',
@@ -280,7 +282,7 @@ function loadProducts(categoria, id){
                 <h1>Se ha añadido correctamente a tu Carro de Compras.</h1>
                 <button class="cart-button" id="change" onclick="loadCart()">
                     <img style="width: 25px; margin-right: 10px;" src="assets/img/carro.png" alt="">
-                    <h5>Ir a mi Carro de Compras</h5>
+                    <h5>Ir a Mi Carro de Compras</h5>
                 </button>
             `;
         };
@@ -327,7 +329,7 @@ function loadCart(){
             <div class="products"></div>
             <div class="total">Total: L.${orderData.total}</div>
             <div class="buttons">
-                <button class="button" onclick="saveOrder(this); loadAddressInfo();"data-order='${JSON.stringify(orderData)}'>Realizar Pedido</button>
+                <button class="button" onclick="saveOrder(this); loadAddressInfo();"data-order='${JSON.stringify(orderData).replace(/'/g, "\\")}'>Realizar Pedido</button>
                 <button class="button cancel">Cancelar</button>
             </div>
             `;
@@ -346,9 +348,10 @@ function loadCart(){
 };
 
 function saveOrder(button) {
-    const orderData = JSON.parse(button.getAttribute('data-order'));
-    pedidoFinal = orderData;
-    console.log("Pedido en proceso...");
+    const orderData = button.getAttribute('data-order').replace(/\\/g, "'");
+    pedidoFinal = JSON.parse(orderData);
+    pedidoFinal.total = pedidoFinal.total + ((pedidoFinal.total)*0.01) + 40;
+    console.log(pedidoFinal)
 }
 
 function loadAddressInfo(){
@@ -424,12 +427,14 @@ function askCardDetails(){
             <h2>${pedidoFinal.nombre}</h2>
             <label>Fecha del pedido: ${pedidoFinal.fecha}</label>
             <label>Hora del pedido: ${pedidoFinal.hora}</label>
-            <h4 style="margin-bottom:5px;">Productos</h4>
-            <div id=products></div>
             <h4 style="margin-bottom:5px;">Dirección</h4>
             <label>Descripción: ${pedidoFinal.direccion.descripcion}</label>
             <label>Latitud: ${pedidoFinal.direccion.latitud}</label>
             <label>Longitud: ${pedidoFinal.direccion.longitud}</label>
+            <h4 style="margin-bottom:5px;">Productos</h4>
+            <div id="products"></div>
+            <label>ISV (1%): ${(pedidoFinal.total)*0.01}</label>
+            <label>Costo del envío: L.40 </label>
             <h3>Total a Pagar: L.${pedidoFinal.total}</h3>
         </div>
         <div class="standard-form">
@@ -458,6 +463,17 @@ function askCardDetails(){
 };
 
 function orderFinished(){
+    document.getElementById('main-content').style.alignItems = 'center';
+    document.getElementById('main-content').style.justifyContent = 'center';
+    document.getElementById('main-content').innerHTML = `
+    <img style="width: 200px;" src="assets/img/check-png.webp">
+    <h1>¡Se ha realizado tu pedido exitosamente!</h1>
+    <button class="cart-button" id="change" onclick="loadOrders()">
+        <img style="width: 25px; margin-right: 10px;" src="assets/img/bolsa.png" alt="">
+        <h5>Ir a Mis Pedidos</h5>
+    </button>
+    `;
+    
     fetch(`${URL}/pedidos`, {
         method: 'POST',
         headers:{
@@ -469,5 +485,11 @@ function orderFinished(){
     .then((result)=>{
         console.log(result);
     });
+}
+
+function loadOrders(){
+    document.getElementById('main-content').innerHTML = `
+    <div>POLLO</div>
+    `
 }
 

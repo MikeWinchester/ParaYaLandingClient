@@ -26,7 +26,8 @@ header{
 
 #header-bts{
     display: flex;
-    justify-content: space-around;
+    justify-content: end;
+    margin-right: 20px;
 }
 
 .head-bt{
@@ -49,17 +50,6 @@ header{
 .head-bt:hover{
     background-color: rgb(223, 223, 223);
     cursor: pointer;
-}
-
-
-#head-icon{
-    width: 40px;
-    margin-right: 10px;
-}
-
-#store-icon{
-    width: 30px;
-    margin-right: 10px;
 }
 
 #login-icon{
